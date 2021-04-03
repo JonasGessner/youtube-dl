@@ -1591,6 +1591,7 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
             tbr = float_or_none(
                 fmt.get('averageBitrate') or fmt.get('bitrate'), 1000)
             dct = {
+                'full': json.dumps(fmt),
                 'asr': int_or_none(fmt.get('audioSampleRate')),
                 'filesize': int_or_none(fmt.get('contentLength')),
                 'format_id': itag,
