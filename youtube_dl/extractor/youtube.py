@@ -2092,6 +2092,15 @@ class YoutubeIE(YoutubeBaseInfoExtractor):
                 or quality.replace('audio_quality_', ''))
             dct = {
                 'format_id': join_nonempty(itag, fmt.get('isDrc') and 'drc'),
+                'full': json.dumps(fmt),
+                'asr': int_or_none(fmt.get('audioSampleRate')),
+                'filesize': int_or_none(fmt.get('contentLength')),
+                'format_id': itag,
+                'format_note': fmt.get('qualityLabel') or quality,
+                'fps': int_or_none(fmt.get('fps')),
+                'height': int_or_none(fmt.get('height')),
+                'quality': q(quality),
+                'tbr': tbr,
                 'url': fmt_url,
                 # Format 22 is likely to be damaged: see https://github.com/yt-dlp/yt-dlp/issues/3372
                 'source_preference': ((-5 if itag == '22' else -1)
